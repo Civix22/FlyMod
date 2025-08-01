@@ -1,47 +1,29 @@
-using System;
 using BepInEx;
-using HarmonyLib;
-using System.Collections.Generic;
-using Utilla;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using GorillaLocomotion;
-using GorillaExtensions;
-
-
-
 
 namespace Fly
 {
-    [BepInPlugin("com.gorillatag.Fly.civix", "Fly", "1.0.0")]
-    class Flymod : BaseUnityPlugin
+    [BepInPlugin("com.gorillatag.Fly.civix", "Fly", "1.0.1")]
+    class FlyMod : BaseUnityPlugin
     {
-        bool inRoom => NetworkSystem.Instance.InRoom && NetworkSystem.Instance.GameModeString.Contains("MODDED");
         void Update()
         {
-            if (inRoom)
+            if (NetworkSystem.Instance.InRoom && NetworkSystem.Instance.GameModeString.Contains("MODDED"))
             {
-                if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+                if (ControllerInputPoller.instance.rightControllerPrimaryButton) // a
                 {
-                    GorillaLocomotion.GTPlayer.Instance.transform.position += (GorillaLocomotion.GTPlayer.Instance.headCollider.transform.forward) * Time.deltaTime * 15;
-                    GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    GorillaLocomotion.GTPlayer.Instance.transform.position += GorillaLocomotion.GTPlayer.Instance.headCollider.transform.forward * Time.deltaTime * 15;
+                    GorillaTagger.Instance.rigidbody.velocity = Vector3.zero;
                 }
 
-                else
+                if (ControllerInputPoller.instance.leftControllerPrimaryButton) // x
                 {
-                    if (ControllerInputPoller.instance.leftControllerPrimaryButton)
-                    {
-                        GorillaLocomotion.GTPlayer.Instance.transform.position -= (GorillaLocomotion.GTPlayer.Instance.headCollider.transform.forward) * Time.deltaTime * 15;
-                        GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    }
-
-                    else
-                    {
-                        GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    }
-
+                    GorillaLocomotion.GTPlayer.Instance.transform.position -= GorillaLocomotion.GTPlayer.Instance.headCollider.transform.forward * Time.deltaTime * 15;
+                    GorillaTagger.Instance.rigidbody.velocity = Vector3.zero;
                 }
 
+                if (ControllerInputPoller.instance.leftControllerSecondaryButton) // y
+                    GorillaTagger.Instance.rigidbody.velocity = Vector3.zero;
             }
         }
     }

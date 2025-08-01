@@ -72,9 +72,6 @@
     <Reference Include="UnityEngine.ProfilerModule">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\Gorilla Tag_Data\Managed\UnityEngine.ProfilerModule.dll</HintPath>
     </Reference>
-    <Reference Include="Utilla">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\BepInEx\plugins\Utilla\Utilla.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
