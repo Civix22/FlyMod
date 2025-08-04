@@ -13,7 +13,7 @@ using GorillaExtensions;
 
 namespace Fly
 {
-    [BepInPlugin("com.gorillatag.Fly.civix", "Fly", "1.0.0")]
+    [BepInPlugin("com.gorillatag.Flymod.civix", "Flymod", "1.0.0")]
     class Flymod : BaseUnityPlugin
     {
         bool inRoom => NetworkSystem.Instance.InRoom && NetworkSystem.Instance.GameModeString.Contains("MODDED");
@@ -37,7 +37,9 @@ namespace Fly
 
                     else
                     {
-                        GorillaLocomotion.GTPlayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        Rigidbody rb = GTPlayer.Instance.GetComponent<Rigidbody>();
+                        rb.velocity = Vector3.zero;
+                        rb.AddForce(-Physics.gravity * rb.mass * GTPlayer.Instance.scale);
                     }
 
                 }
